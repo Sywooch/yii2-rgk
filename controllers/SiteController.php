@@ -2,7 +2,11 @@
 
 namespace app\controllers;
 
+use app\components\MyBehavior;
+use app\models\SentNotification;
+use app\models\SignupForm;
 use Yii;
+use yii\data\ActiveDataProvider;
 use yii\filters\AccessControl;
 use yii\web\Controller;
 use yii\filters\VerbFilter;
@@ -11,15 +15,16 @@ use app\models\ContactForm;
 
 class SiteController extends Controller
 {
+
     public function behaviors()
     {
         return [
             'access' => [
                 'class' => AccessControl::className(),
-                'only' => ['logout'],
+                'only' => ['logout','index'],
                 'rules' => [
                     [
-                        'actions' => ['logout'],
+                        'actions' => ['logout','index'],
                         'allow' => true,
                         'roles' => ['@'],
                     ],
@@ -49,7 +54,15 @@ class SiteController extends Controller
 
     public function actionIndex()
     {
-        return $this->render('index');
+        $dataProvider = new ActiveDataProvider([
+            'query' => SentNotification::find()
+                ->where(['to_user_id' => Yii::$app->user->getId()])
+                ->orderBy('sent_at DESC'),
+            'pagination' => [
+                'pageSize' => 5,
+            ],
+        ]);
+        return $this->render('notification/index', ['dataProvider' => $dataProvider]);
     }
 
     public function actionLogin()
@@ -89,6 +102,39 @@ class SiteController extends Controller
 
     public function actionAbout()
     {
+
         return $this->render('about');
+    }
+
+    /**
+     * Signs user up.
+     *
+     * @return mixed
+     */
+    public function actionSignup()
+    {
+        $model = new SignupForm();
+        if ($model->load(Yii::$app->request->post())) {
+            if ($user = $model->signup()) {
+                if (Yii::$app->getUser()->login($user)) {
+                    return $this->goHome();
+                }
+            }
+        }
+
+        return $this->render('signup', [
+            'model' => $model,
+        ]);
+    }
+
+    public function actionReadNotification($id){
+        /**
+         * @var $notification SentNotification
+         */
+        $notification = SentNotification::find()
+            ->where(['id' => $id, 'to_user_id' => Yii::$app->user->getId()])
+            ->one();
+        $notification->is_read = 1;
+        return $notification->save();
     }
 }

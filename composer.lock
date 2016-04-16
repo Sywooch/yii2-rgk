@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "0f1909ba775319d603a00a42e9ac8d59",
-    "content-hash": "ad6de7a65af599c6652768baa19fec77",
+    "hash": "479407875c975e7dbee0aefcb85e62d5",
+    "content-hash": "5c27dd23827e5c153817a7f3f5d227c6",
     "packages": [
         {
             "name": "bower-asset/bootstrap",
@@ -298,34 +298,6 @@
                 "html"
             ],
             "time": "2013-11-30 08:25:19"
-        },
-        {
-            "name": "ilopx/yii2-basic-htaccess",
-            "version": "1.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/ilopX/yii2-basic-htaccess.git",
-                "reference": "6be3223a9a2009bcad7198652d60e650dbf0cc2f"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/ilopX/yii2-basic-htaccess/zipball/6be3223a9a2009bcad7198652d60e650dbf0cc2f",
-                "reference": "6be3223a9a2009bcad7198652d60e650dbf0cc2f",
-                "shasum": ""
-            },
-            "type": "library",
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "ilopX",
-                    "email": "ilopX@ukr.net"
-                }
-            ],
-            "description": "Set web directory in webroot",
-            "time": "2015-08-22 22:21:39"
         },
         {
             "name": "swiftmailer/swiftmailer",

@@ -3,13 +3,13 @@
 $params = require(__DIR__ . '/params.php');
 
 $config = [
-    'id' => 'RGK',
+    'id' => 'RGK Event messenger',
     'basePath' => dirname(__DIR__),
     'bootstrap' => ['log'],
     'components' => [
         'request' => [
             // !!! insert a secret key in the following (if it is empty) - this is required by cookie validation
-            'cookieValidationKey' => '2cSClDNBaI2bIXw0EG1FqR3Ch2QvJ2o3',
+            'cookieValidationKey' => 'y3cJJbTR2ZwDMnHnQeDC1YUoj-KJpa2a',
             'baseUrl' => '',
         ],
         'cache' => [
@@ -46,6 +46,9 @@ $config = [
                 '' => 'site/index',
                 '<action>'=>'site/<action>',
             ],
+        ],
+        'authManager' => [
+            'class' => 'yii\rbac\PhpManager',
         ],
     ],
     'params' => $params,
